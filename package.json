@@ -1,0 +1,21 @@
+{
+  "name": "vitamin-login",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Vianney Briois <briois.vianney@gmail.com>",
+  "keywords": [],
+  "dependencies": {
+    "help": "^3.0.2",
+    "jwt-decode": "^2.2.0",
+    "ramda": "^0.23.0",
+    "react": "^15.4.2",
+    "redux-react-router": "^1.0.0-beta3",
+    "vitaminjs": "^1.0.0"
+  },
+  "scripts": {
+    "start": "vitamin start",
+    "build": "vitamin build",
+    "serve": "vitamin serve"
+  },
+  "private": true
+}
