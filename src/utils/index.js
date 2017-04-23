@@ -1,14 +1,4 @@
 
-
-export function createConstants(...constants) {
-    return constants.reduce((acc, constant) => {
-        acc[constant] = constant;
-        return acc;
-    }, {});
-}
-
-
-
 export function createReducer(defaultState, handlers) {
     if (typeof defaultState === 'object') {
         handlers = defaultState;

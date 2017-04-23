@@ -13,7 +13,7 @@ import {logoutAndRedirect} from '../actions';
 const App = ({isAuthenticated, logoutAndRedirect, children}) => (
     <div className={s.app}>
         <Helmet
-            title="VitaminJS"
+            title="VitaminJS Login"
             meta={[
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             ]}

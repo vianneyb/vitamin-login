@@ -1,33 +1,33 @@
 import React from 'react';
-import { pushState } from 'redux-react-router';
 import { connect } from 'vitaminjs/react-redux';
+import { push } from 'vitaminjs/react-router-redux';
 
 export function requireAuthentication(Component) {
 
     class AuthenticatedComponent extends React.Component {
 
-        componentWillMount () {
+        componentWillMount() {
             this.checkAuth(this.props.isAuthenticated);
         }
 
-        componentWillReceiveProps (nextProps) {
+        componentWillReceiveProps(nextProps) {
             this.checkAuth(nextProps.isAuthenticated);
         }
 
-        checkAuth (isAuthenticated) {
+        checkAuth(isAuthenticated) {
             if (!isAuthenticated) {
                 console.log('redirect');
                 let redirectAfterLogin = this.props.location.pathname;
                 this.props
-                    .dispatch(pushState(null, `/login?next=${redirectAfterLogin}`));
+                    .dispatch(push(`/login?next=${redirectAfterLogin}`));
             }
         }
 
-        render () {
+        render() {
             return (
                 <div>
                     {this.props.isAuthenticated === true
-                        ? <Component {...this.props}/>
+                        ? <Component {...this.props} />
                         : null
                     }
                 </div>

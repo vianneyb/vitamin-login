@@ -1,6 +1,8 @@
 import { checkHttpStatus, parseJSON } from '../utils';
-import { pushState } from 'redux-react-router';
+import { push } from 'vitaminjs/react-router-redux';
 import jwtDecode from 'jwt-decode';
+
+import config from '../config';
 
 export function loginUserSuccess(token) {
     console.log('loginUserSuccess');
@@ -44,7 +46,7 @@ export function logoutAndRedirect() {
     console.log('logoutAndRedirect');
     return (dispatch, state) => {
         dispatch(logout());
-        dispatch(pushState(null, '/login'));
+        dispatch(push('/login'));
     }
 }
 
@@ -53,7 +55,7 @@ export function loginUser(email, password, redirect="/") {
     console.log('loginUser', {email, password, redirect});
     return function(dispatch) {
         dispatch(loginUserRequest());
-        return fetch('http://localhost:3000/auth/getToken/', {
+        return fetch(config.api.auth, {
             method: 'post',
             credentials: 'include',
             headers: {
@@ -68,7 +70,7 @@ export function loginUser(email, password, redirect="/") {
                 try {
                     let decoded = jwtDecode(response.token);
                     dispatch(loginUserSuccess(response.token));
-                    dispatch(pushState(null, redirect));
+                    dispatch(push(null, redirect));
                 } catch (e) {
                     dispatch(loginUserFailure({
                         response: {
@@ -106,7 +108,7 @@ export function fetchProtectedData(token) {
 
     return (dispatch, state) => {
         dispatch(fetchProtectedDataRequest());
-        return fetch('http://localhost:3000/getData/', {
+        return fetch(config.api.auth, {
             credentials: 'include',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -120,7 +122,7 @@ export function fetchProtectedData(token) {
             .catch(error => {
                 if(error.response.status === 401) {
                     dispatch(loginUserFailure(error));
-                    dispatch(pushState(null, '/login'));
+                    dispatch(push('/login'));
                 }
             })
     }

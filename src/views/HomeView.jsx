@@ -6,8 +6,8 @@ import s from '../style.css';
 
 const HomeView = () => (
     <div>
-        <h1>React Redux Auth Example</h1>
-        <p>Attempt to access some <Link to='/protected'>protected content.</Link></p>
+        <h1>Vitamin login</h1>
+        <p>Access to <Link to='/protected'>protected content.</Link></p>
     </div>
 );
 
